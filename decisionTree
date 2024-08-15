@@ -1,0 +1,157 @@
+A decision tree is a white box type of ML algorithm, it shares internal decision-making logic, whitch is not available in the black box type of algorithms as with neural network.
+The time complexity of the decision trees is a function of the number of the records and attributes in the given data. Is is a distrebution-free or non-parametric method whitch does not depend upon propability distribution asumption.
+How it works 
+1- Select the best attribute using attrebute Slection Measure (ASM)to split the record.
+2- Make this atrebute a decision node and breaks the dataset into smaller subsets.
+3- Strat tree building by repeating this process recursively for each  child until one of the conditions will match.
+
+but what is attrebute selection measures
+attrebute selection measure ia a heuristic for selecting the splitting criterion that partitions data in the best possible manner, it helps a determine the breakpoints for tuples on a given node.
+ASM provide a rank for each feature (atrebute).
+ The best score attribute will be selected as a splitting attribute (Source). In the case of a continuous-valued attribute, split points for branches also need to define. The most popular selection measures are Information Gain, Gain Ratio, and Gini Index.
+
+Information Gain
+Claude Shannon invented the concept of entropy, which measures the impurity of the input set. In physics and mathematics, entropy is referred to as the randomness or the impurity in a system. In information theory, it refers to the impurity in a group of examples. Information gain is the decrease in entropy. Information gain computes the difference between entropy before the split and average entropy after the split of the dataset based on given attribute values. ID3 (Iterative Dichotomiser) decision tree algorithm uses information gain.
+
+information gain
+
+
+coursera :
+decision tree is an other algorithm to solve clasification problem it's like asking a yes or no question and deviding the data according to those questions 
+two of the comen decision trees is CART and 5.4
+In a decision tree, what does a "branch" represent?
+A decision based on some condition.
+
+In CART, what does it mean for a decision node to be completely "pure"?
+All data examples at the node belong to one class.
+A popular decision tree algorithm is the CART algorithm, CART stands for Classification and Regression Tree. The CART algorithm will split a tree into two parts at each decision node based on a selected feature from the training data set, and then it would split the data set again at the next decision node based on another feature and so on. The splits that are being performed are binary splits, that is, each node can only actually have two child nodes associated with it. To determine where within the tree a decision node will be placed, we are going to use a calculation that is going to generate what is called the Gini index, the Gini index will be calculated for each feature using the formula that you see here, and then a weighted sum is going to be taken and then we'll compare the Gini index values to determine which this feature and which decision node will be at the root of the tree. Looking at this formula, G of course represents the Gini index value that is being determined, Pi is the probability of the data being placed into a specific class using the selected feature where the class really is the label that has been used within the data set for the supervised learning, and then c would represent the number of classes that are being considered, we have our summation operator there that will sum up the square of all those probabilities and then of course we do take that weighted sum, and we're going to be looking at an example of how that works in the next video as well. When we do this calculation, the feature that has the lowest Gini index is considered to have the highest level of purity, in other words, the highest level of purity is going to have a Gini value of ideally of zero, that value or that node would be used as the root node of the tree, so the purest node would have all of the data examples assigned to belong to just one of the two possible classes, on the other hand the most impure node would have the data examples split exactly 50-50 between the two possible output classes, remember the lowest Gini index has the highest level of purity and of course that will be placed higher within the decision tree or the CART tree. 
+
+
+How does CART know when to stop splitting into more nodes? (Select two.)
+When there is no more impurity to reduce.
+When the tree reaches a depth specified in a hyperparameter.
+Let's have a look at how the Gini index may be applied to the example of our bank and their need to determine whether a customer below to preferred status or not.
+Play video starting at ::14 and follow transcript0:14
+In order to perform this calculation, what will happen is, of course, the Gini index is going to be calculated for each feature relative to the label. So, the label really is the field that we're going to be used for our supervised learning, in this case, the preferred label. And then of course, we have each of our features, account age, violations, and balance that we're going to be considering. So we need to calculate a Gini index for each one of these features. The lowest Gini index would of course, become the root node and then the second lowest one have recalculated based on the remaining data would become the second node and so on. So, let's examine the first feature, the account age feature. Now as we look at the account age feature, you're going to see that there are in fact five values that are set to yes, for account age.
+Play video starting at :1:20 and follow transcript1:20
+And there are two of those where the label is set to yes, and so that means that two out of the five are yes values. And we also have, of course, three values where the preferred label is set to no. So we have three out of the five values that are no values. So, if we look at this calculation next, you're going to see is we're going to calculate the Gini index for the account age feature. Now in this case, you can see that we have the no values represented here, and we also of course, have the yes values represented here. So of the five account age values that were set to a yes, you can see that two of them were where the label was, yes, three of them were the label was no. We take each of those probabilities, we square them, we create a sum of those probabilities, subtract that from one and we're left with a Gini index of 0.48 in this case. But we're not done, because we haven't not yet considered the conditions where the account age has been set to no, and so that's our next task. So we're going to now look at the account age values that are set to no. So you can see that we have one, two, three account age values that are set to no. And in this case, we have two of those that result in a no value or for the preferred status or label. And of course we have one that results in a yes. So once again, we have to include this in our probability calculation, we're going to create a Gini index for these values. And so, our Gini index is calculated here where we have one yes label out of the three states or conditions that we found in our virtual considering. And we have two no values out of the three. We calculate these, we generate the square of each of the probabilities. We sum them and subtract them from one to create a Gini value of 0.44. Now of course, each of these need to be these calculations that we performed. The one for where the feature had a yes value, and the one for where the feature had a no value. We have to combine these together, and we're going to do that by creating a weighted sum of the Gini values. And so here, you can see that we're basically applying equal weight to each of those values. We combine the 0.48 Gini value from where our feature was set to yes, and the 0.44 from where our feature was set to no. And by combining these together, we get the weighted sum value of 0.46, which is going to be the Gini index that we're going to use in this comparison. Now that value of 0.46 that was generated for account age, still needs to be compared to the Gini index for the violations as well as for the balance. And, if we were to perform the Gini index calculation in the same manner for violations and the same manner for balance. You would find that the violations would come out to 0.38, and balance would come out to 0.43. So because 0.38 is lower than the value for balance for account age, the violations would actually be selected as the root decision node for this tree. And that's why you can see in the diagram here now, that we have violations that the route decision node because it had the lowest Gini value. It had a Gini value of 0.38 which was of course less than 0.43 and it was also less than 0.46, which was the value that we calculated for account age. And so, now we know which decision node should be at the root of the tree.
+
+Then of course, each data subset that's created by this split would then again need to have a Gini index calculated. So, the next decision would be based on perhaps, determining whether we're going to have a count age or whether we're going to have the account balance as the next decision node. So once again, we would perform a calculation with the remaining subset of data. And in this case, it would be determined that the account age actually would have the lowest Gini index, and then, the remaining decision would be based on the balance. Now, this splitting would continue until there's no more impurity, or in other words, until we reach a Gigi index value of zero. Now that would indicate that all of the data for a feature belongs to just one of the data classes. Or, we can also control how deep our tree will grow by assigning hyper parameters like a maximum depth hyper parameters. And we're going to look at adjusting our hyper parameters a little bit later on. But understand that without any other manipulation, our tree will typically grow until it can no longer create any additional splits in each of our nodes, which contain effectively pure classes of information.
+
+hyper parameters is like a min or max length of our tree 
+#######################################################################################################################################
+
+Interactive Transcript - Enable basic transcript mode by pressing the escape key
+You may navigate through the transcript using tab. To save a note for a section of text press CTRL + S. To expand your selection you may use CTRL + arrow key. You may contract your selection using shift + CTRL + arrow key. For screen readers that are incompatible with using arrow keys for shortcuts, you can replace them with the H J K L keys. Some screen readers may require using CTRL in conjunction with the alt key
+Play video starting at ::2 and follow transcript0:02
+C4.5 is a decision tree algorithm that can be used as an alternative to cart, where cart could only make a decision based on binary classes. C4.5 can use any number of classes in its decision node calculation. As you'll see when we look at our slide and the actual formula. With a C4.5, we also did not use a Gini index as we did with cart. But instead we use the concept of entropy and information gain to determine the placement of nodes within the trees.
+Play video starting at ::41 and follow transcript0:41
+The term entropy refers to how ordered a data set is, and we calculate the amount of entropy at each of the nodes within the tree. We subtract the child's entropy from the parents entropy, and the result is the amount of information gain that has been picked up by the generation of the child node.
+Play video starting at :1:10 and follow transcript1:10
+So, the node that has the highest level of information gained ends up being placed as the root node within the decision tree. Now, looking at our slide, you're going to see that entropy is calculated across the probability for each of the features that we're concerned with. So you can see that entropy is equal to the probability of class number 1, times the log base 2 of probability number 1. And this provides a scaling of that particular feature. And then we can add additional features. So, p2, which would be class number two that we're concerned with, all the way up to pn or class n. And so in this way multiple classes can be considered at each decision node, instead of just the two classes that would be considered with the cart algorithm. The feature as I mentioned before that has the highest amount of information gain, is going to become the root decision node. And then we'll repeat this process as the subset is split. And each time we'll recalculate on the remaining values that are in that subset. Now, if two nodes are compared together and they have the same amount of information gain. Then a concept called the gain ratio, will determine which of these are going to be used. The gain ratio is calculated based on the node that has the fewest number of unique values. That node is going to become preferred. So we have two nodes based on the individual features. Perhaps we have a dataset that contains customer records, and we have one node that perhaps contains a customer ID value. Whereas another node that contains a customer location value. Now, I think you could have it recognized that the customer ID really is a very little predictive value. Whereas the customer location may be useful. And so, in this case also every customer would have a unique customer ID, where as several customers may share a customer location. And so, in this case the node with the fewest unique values would have precedence because of more predicted value. C4.5 actually came from an older algorithm called ID3. And that algorithm did not use the concept of game ratio the way C4.5 does. But instead, ID3 would choose at random between any nodes that had identical information game.
+Play video starting at :4:27 and follow transcript4:27
+There's actually also a successor to C4.5, called C5.0. And you might wonder, why aren't we using it? It's newer. And of course, yes, it's faster. It's more memory efficient, but it's not open source
+##################################################################################################################################
+
+what is dicretization ?
+is the process of converting continous variables into discret varibales to minimize the number of sigmunattaion in the tree 
+how does descritization works ?
+we creat bounderries that groupe the similar variable this is called also data binning, spliting our data into bins creats a useful measurement for our purposes 
+We can also do binning by defining bins that will contain a certain number of values rather than a fixed range of values. We could say that each bin will contain 10 values and whatever their values may be and in this way, we could divide up a data set into evenly spaced bins as well. We've referred to this as equal frequency discretization, but of course, equal width discretization may be a little bit more common.
+
+#####################################################################
+what is the problem of the decision tree ?
+it does not handle categorical values very well 
+instead of using mapping like assining 1 to red 2 to blue (it's not really effitient because we might creat a relationship between those variables that does not exist)
+is there any other methode ?
+Yes, one hot encoding or dummy variable, ust imagine a table where we assigne vehicle1 int the red column we put 1 and in the blue column we put 0 and and for vehicle2 we do the opposite in red column we put 0 and in the blue column we put 1
+be aware somtimes grading the variable is useful (A, B ,C) 
+ But otherwise, if there is no ordinal relationship in the data, we sould not create one.
+ CART does not support more then 2 classes (it's better to use C4.5 algo) otherwise for binary classification CART might work
+ ei: 
+ If your decision tree needs to make decisions based on features with more than two classes, then C4.5 is the obvious choice. If binary splitting is sufficient, then CART may occasionally be better at correctly classifying data examples, though usually not by any significant amount.
+
+Note: Missing values may not be supported in all implementations of CART and C4.5. You may need to manually impute missing values.
+####################################################################
+Algorithm
+
+Summary
+
+   Splitting Metric |  Supports Classification and Regression? | Pruning Method | Supports Multi-Class Splitting?|Supports Missing v     
+                                
+CART Gini index         Cost complexity pruning                           Both            NO                                  YES
+C4.5 Information gain ratio   Error-based pruning                         Both            YES                                 YES
+
+
+#########################################################################
+what are the advantages of the decision tree algorithm ?
+they are simple and easy to interpret 
+ They are, in general, faster than classification algorithms like k-nearest neighbor, or KNN. And they are quite flexible, they can be used for a number of different tasks, from classification through to regression of course.
+
+what are the disadvantages ?
+They tend towards overfitting the training data.we should alwyas use the right hyperparameter
+We'll use pruning and other techniques to try to reduce that effect of overfitting the training data. Now as we do this tuning, we may find that we actually introduce a lot of complexity into the model as well, so we hould always test the output of each algo and pick the best.
+##########################################################################
+Gold :
+Guidelines for Building a Decision Tree Model
+Follow these guidelines when you are building decision tree models.
+
+Build a Decision Tree Model
+When building a decision tree model:
+
+Consider using decision trees for both classification and regression tasks.
+
+Consider using decision trees if you'd like to keep the model simple, easy to understand, and easy to demonstrate visually—especially to non-technical audiences.
+
+Consider that, depending on the nature of the dataset and the implementation of the decision tree algorithm, you may not need to prepare that data as much as you would with other algorithms.
+
+Consider that you may need to discretize continuous variables before using them with decision tree algorithms.
+
+Consider that you may need to one-hot encode variables before using them with decision tree algorithms.
+
+Be aware that decision trees are prone to overfitting.
+
+Perform pre-pruning by tuning various decision tree hyperparameters, like the maximum depth of the tree, to help reduce overfitting.
+
+Consider performing various pruning methods such as reduced error pruning to further reduce the complexity of trees and minimize overfitting.
+
+Use C4.5 over CART when multi-class splitting is required.
+
+Evaluate decision trees using the same metrics you've used for other regression and classification tasks—mean squared error (MSE), accuracy, precision, recall, etc.
+
+Use Python for Decision Trees
+The scikit-learn DecisionTreeClassifier() and DecisionTreeRegressor() classes enable you to construct a classification- or regression-based decision tree model, respectively. The following are some of the objects and functions you can use to build such a model.
+
+model = sklearn.tree.DecisionTreeClassifier(criterion = 'gini', max_depth = 5) —This constructs a decision tree for classification. In this case, the splitting criterion is the Gini index.
+
+model = sklearn.tree.DecisionTreeRegressor(max_depth = 5) —This constructs a decision tree for regression.
+
+You can use these class objects to call the same fit(), score(), predict(), and predict_proba() (classification only) methods as before, as well as any of the applicable metrics methods.
+
+sklearn.tree.export_graphviz(model, out_file = dot_data, feature_names = X_train.columns.values.tolist(), class_names = ['0', '1']) —Create a graphical representation of a decision tree's structure
+
+
+
+
+Sample Dateset :- https://archive.ics.uci.edu/ml/datasets/Bank+Marketing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
